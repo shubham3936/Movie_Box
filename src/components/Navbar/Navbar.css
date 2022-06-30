@@ -1,0 +1,19 @@
+.navbar_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #E0FFFF;
+    padding: 0 5%;
+    border-bottom: 1px solid #ADD8E6;
+}
+.navbar_logo {
+    width: 50px;
+}
+.navbar_button {
+    background-color: black;
+    color: white;
+    padding: 10px 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+}
