@@ -27,13 +27,6 @@
     width: 300px;
     background-color: lightgray;
 }
-.signinbody_form > button {
-    height: 35px;
-    background-color: #181818;
-    font-weight: 700;
-    color: white;
-    cursor: pointer;
-}
 .signinbody_text {
     text-align: center;
     margin-top: 10px;
@@ -43,4 +36,4 @@
     font-weight: 700;
     color: black;
     cursor: pointer;
-} 
+}
