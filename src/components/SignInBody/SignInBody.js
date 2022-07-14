@@ -2,12 +2,32 @@ import React, { useState } from "react";
 import "./SignInBody.css";
 import { SIGN_IN_BODY_TEXT } from "../../constants/components";
 import Button from "../../global/Button/Button";
+import { Navigate } from "react-router-dom";
 
 function SignInBody() {
   const [showSignInBox, setShowSignInBox] = useState(true);
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   function setShowSignInBoxAs(param) {
     setShowSignInBox(param);
+  }
+
+  function signUp() {
+    console.log("name", name);
+    console.log("email", email);
+    console.log("password", password);
+
+    // auth
+    //   .createUserWithEmailAndPassword(email, password)
+    //   .then((data) => {
+    //     console.log(data);
+    //     setUsUserLoggedIn(true);
+    //     Navigate("/");
+    //   })
+    //   .catch((err) => console.log(err));
   }
 
   return (
@@ -47,7 +67,9 @@ function SignInBody() {
             <Button text={SIGN_IN_BODY_TEXT.LOGIN_AS_GUEST_USER} />
             <p className="signinbody_text">
               {SIGN_IN_BODY_TEXT.HAVE_AN_ACCOUNT}{" "}
-              <span onClick={() => setShowSignInBoxAs(true)}>{SIGN_IN_BODY_TEXT.SIGN_IN_NOW}</span>
+              <span onClick={() => setShowSignInBoxAs(true)}>
+                {SIGN_IN_BODY_TEXT.SIGN_IN_NOW}
+              </span>
             </p>
           </div>
         </div>

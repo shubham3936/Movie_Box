@@ -6,6 +6,8 @@
 .movies_row_container {
     display: flex;
     align-items: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 .movies_row > img {
     /* width: 100px; */
