@@ -1,0 +1,10 @@
+1. firebase login
+2. firebase init
+    -> Select Hosting
+    -> Use an existing project
+    -> Choose project name
+    -> What do you want to use as your public directory? => build
+    -> Configure as a single-page app => y
+    -> Set up automatic builds and deploys with GitHub? => n
+3. npm run build
+4. firebase deploy 

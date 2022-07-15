@@ -1,11 +1,13 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import firebase from "firebase/compat/app";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+//import auth (authentication/authorization) from  firebase
+import "firebase/compat/auth"
+
+//import firebasse (databse) from firebase
+import "firebase/compat/firestore"
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyBLJH2QaFwRyx4JWlinsP3_qseuaktA930",
   authDomain: "movie-collection-f07b3.firebaseapp.com",
@@ -17,5 +19,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+export {auth, app}
+export default db;

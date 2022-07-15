@@ -8,15 +8,29 @@ import HomePage from "./container/HomePage/HomePage";
 
 function App() {
 
-  const [user,setUser] = useState(true);
+  // const [user,setUser] = useState(true);
+  const [isUserLoggedIn,setIsUserLoggedIn] = useState(false);
+  const [productId, setProductId] = useState(0);
 
 
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={user ? <HomePage /> : <LandingPage />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route 
+            path="/" 
+            element = {
+              isUserLoggedIn? (
+                <HomePage
+                  setProductId={setProductId}
+                  isUserLoggedIn={isUserLoggedIn}
+                  setIsUserLoggedIn={setIsUserLoggedIn}
+                />
+              ):(<LandingPage/>)
+            }
+          />
+          <Route path="/sign-in" 
+            element={<SignIn setIsUserLoggedIn={setIsUserLoggedIn}/>} />
 
         </Routes>
       </div>

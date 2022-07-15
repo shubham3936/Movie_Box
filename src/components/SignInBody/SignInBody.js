@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import "./SignInBody.css";
 import { SIGN_IN_BODY_TEXT } from "../../constants/components";
 import Button from "../../global/Button/Button";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
 
-function SignInBody() {
+function SignInBody({setIsUserLoggedIn}) {
   const [showSignInBox, setShowSignInBox] = useState(true);
+
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,19 +19,33 @@ function SignInBody() {
   }
 
   function signUp() {
-    console.log("name", name);
-    console.log("email", email);
-    console.log("password", password);
+    if(name === "" || email ==="" || password === "")
+    {
+      alert( "Name, email or Password cannot be EMPTY.");
+      return ;
+    }
 
-    // auth
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then((data) => {
-    //     console.log(data);
-    //     setUsUserLoggedIn(true);
-    //     Navigate("/");
-    //   })
-    //   .catch((err) => console.log(err));
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((data) => {
+        console.log(data);
+        setIsUserLoggedIn(true);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
   }
+
+  function signIn() {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log("Successfully logged in!");
+        setIsUserLoggedIn(true);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  }
+
 
   return (
     <>
@@ -37,12 +54,17 @@ function SignInBody() {
         <div className="signinbody_container">
           <div className="signinbody_form">
             <p className="signinbody_title">{SIGN_IN_BODY_TEXT.SIGN_IN}</p>
-            <input placeholder={SIGN_IN_BODY_TEXT.EMAIL_PLACEHOLDER} />
+            <input placeholder={SIGN_IN_BODY_TEXT.EMAIL_PLACEHOLDER} 
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
+            />
             <input
               placeholder={SIGN_IN_BODY_TEXT.PASSWORD_PLACEHOLDER}
+              value={password}
               type="password"
+              onChange={(event) => setPassword(event.target.value)}
             />
-            <Button text={SIGN_IN_BODY_TEXT.SIGN_IN} />
+            <Button text={SIGN_IN_BODY_TEXT.SIGN_IN} onClicking={signIn}/>
             <Button text={SIGN_IN_BODY_TEXT.LOGIN_AS_GUEST_USER} />
             <p className="signinbody_text">
               {SIGN_IN_BODY_TEXT.NEW_TO_MOVIE_APP}{" "}
@@ -57,13 +79,20 @@ function SignInBody() {
         <div className="signinbody_container">
           <div className="signinbody_form">
             <p className="signinbody_title">{SIGN_IN_BODY_TEXT.SIGN_UP}</p>
-            <input placeholder="Name" />
-            <input placeholder={SIGN_IN_BODY_TEXT.EMAIL_PLACEHOLDER} />
+            <input 
+              placeholder="Name"
+              value={name} 
+              onChange={e => setName(e.target.value)} />
+            <input placeholder={SIGN_IN_BODY_TEXT.EMAIL_PLACEHOLDER} 
+              value={email} 
+              onChange={e => setEmail(e.target.value)} />
             <input
               placeholder={SIGN_IN_BODY_TEXT.PASSWORD_PLACEHOLDER}
               type="password"
+              value={password}
+              onChange={e =>  setPassword(e.target.value)}
             />
-            <Button text={SIGN_IN_BODY_TEXT.SIGN_UP} />
+            <Button onClicking={signUp} text={SIGN_IN_BODY_TEXT.SIGN_UP} />
             <Button text={SIGN_IN_BODY_TEXT.LOGIN_AS_GUEST_USER} />
             <p className="signinbody_text">
               {SIGN_IN_BODY_TEXT.HAVE_AN_ACCOUNT}{" "}
